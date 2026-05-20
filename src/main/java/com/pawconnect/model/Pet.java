@@ -17,6 +17,7 @@ public class Pet {
     private String breed;
     private String location;
     private String contactNumber;
+    private String imageUrl;
 
     public Pet() {
     }
@@ -63,9 +64,19 @@ public class Pet {
 
     public String getContactNumber() {
         return contactNumber;
+
     }
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
+
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
