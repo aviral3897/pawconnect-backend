@@ -1,12 +1,15 @@
+
 package com.pawconnect.controller;
 
 import com.pawconnect.model.Pet;
 import com.pawconnect.repository.PetRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+@CrossOrigin(origins = "*")
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/pets")
+
 public class PetController {
 
     private final PetRepository petRepository;
@@ -15,37 +18,44 @@ public class PetController {
         this.petRepository = petRepository;
     }
 
-    @PostMapping
+    // ADD PET
+
+    @PostMapping("/add")
     public Pet addPet(@RequestBody Pet pet) {
+
         return petRepository.save(pet);
     }
 
+    // GET ALL PETS
+
     @GetMapping
-    public java.util.List<Pet> getPets() {
+    public List<Pet> getAllPets() {
+
         return petRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Pet getPetById(@PathVariable Long id) {
-        return petRepository.findById(id).orElseThrow();
+    @GetMapping("/myPets/{email}")
+    public List<Pet> getMyPets(@PathVariable String email) {
+
+        return petRepository.findByOwnerEmail(email);
     }
 
-    @DeleteMapping("/{id}")
-    public void deletePet(@PathVariable Long id) {
+    @GetMapping("/nearby/{email}")
+    public List<Pet> getNearbyPets(@PathVariable String email) {
+
+        return petRepository.findByOwnerEmailNot(email);
+    }
+
+    // DELETE PET
+
+
+    @DeleteMapping("/delete/{id}")
+    public String deletePet(@PathVariable Long id) {
+
         petRepository.deleteById(id);
+
+        return "Pet deleted successfully!";
     }
 
-    @PutMapping("/{id}")
-    public Pet updatePet(@PathVariable Long id, @RequestBody Pet updatedPet) {
 
-        Pet pet = petRepository.findById(id).orElseThrow();
-
-        pet.setName(updatedPet.getName());
-        pet.setType(updatedPet.getType());
-        pet.setBreed(updatedPet.getBreed());
-        pet.setLocation(updatedPet.getLocation());
-        pet.setContactNumber(updatedPet.getContactNumber());
-
-        return petRepository.save(pet);
-    }
 }

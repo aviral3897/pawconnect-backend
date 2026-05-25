@@ -1,23 +1,35 @@
 package com.pawconnect.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "pets")
+
 public class Pet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     private String name;
-    private String type;
+
     private String breed;
+
+    private String age;
+
+    private String gender;
+
     private String location;
-    private String contactNumber;
+
+    @Column(length = 2000)
+    private String description;
+
     private String imageUrl;
+
+    private String status;
+
+    private String ownerEmail;
 
     public Pet() {
     }
@@ -38,20 +50,28 @@ public class Pet {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getBreed() {
         return breed;
     }
 
     public void setBreed(String breed) {
         this.breed = breed;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getLocation() {
@@ -62,14 +82,12 @@ public class Pet {
         this.location = location;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
-
+    public String getDescription() {
+        return description;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImageUrl() {
@@ -78,5 +96,21 @@ public class Pet {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
     }
 }
